@@ -1,5 +1,14 @@
-# same as 'caddy reverse-proxy --from stg.notme.one --to 0.0.0.:5000'
-stg.notme.one {
+# same as 'caddy reverse-proxy --from www.notme.one --to 0.0.0.:5000'
+# run in background with cmd 'caddy start'
+
+notme.one {
+	redir https://www.{host}{uri}
+}
+
+www.notme.one {
 	reverse_proxy 0.0.0.0:5000
 }
 
+stg.notme.one {
+	reverse_proxy 0.0.0.0:5000
+}
