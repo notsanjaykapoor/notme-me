@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "setup vps"
+
+echo "apt update && apt install -y caddy docker.io"

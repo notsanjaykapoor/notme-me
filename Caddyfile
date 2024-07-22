@@ -1,0 +1,5 @@
+# same as 'caddy reverse-proxy --from stg.notme.one --to 0.0.0.:5000'
+stg.notme.one {
+	reverse_proxy 0.0.0.0:5000
+}
+
