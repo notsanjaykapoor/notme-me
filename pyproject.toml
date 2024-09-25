@@ -1,0 +1,28 @@
+[project]
+name = "notme-me"
+version = "0.1.0"
+description = "just me"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.1.7",
+    "fastapi>=0.115.0",
+    "jinja2>=3.1.4",
+    "python-dotenv>=1.0.1",
+    "ulid-py>=1.1.0",
+    "uvicorn>=0.30.6",
+]
+
+[tool.ruff]
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F"]
+ignore = ["E402"]
+
+line-length = 180
+
+[tool.ruff.isort]
+force-sort-within-sections = true
+order-by-type = true
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
