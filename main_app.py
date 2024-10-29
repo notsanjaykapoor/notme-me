@@ -4,6 +4,7 @@ import os
 import fastapi
 import fastapi.middleware
 import fastapi.middleware.cors
+import fastapi.staticfiles
 import fastapi.templating
 
 
@@ -18,6 +19,8 @@ templates = fastapi.templating.Jinja2Templates(directory="routers")
 # create app object
 app = fastapi.FastAPI(lifespan=lifespan)
 
+app.mount("/static", fastapi.staticfiles.StaticFiles(directory="static"), name="static")
+
 app.add_middleware(
     fastapi.middleware.cors.CORSMiddleware,
     allow_origins=["*"],
@@ -26,9 +29,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 def home():
     return fastapi.responses.RedirectResponse("/me")
+
+
+@app.get("/favicon.ico")
+def favicon():
+    file_name = "favicon.ico"
+    file_path = os.path.join(app.root_path, "static", file_name)
+    return fastapi.responses.FileResponse(
+        path=file_path,
+        headers={"Content-Disposition": "attachment; filename=" + file_name},
+    )
 
 
 @app.get("/me", response_class=fastapi.responses.HTMLResponse)
