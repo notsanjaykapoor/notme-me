@@ -166,21 +166,22 @@ def _docker_image_pull(host: str, user: str, image: str) -> int:
 
 def _docker_run_cmd() -> str:
     """construct docker run command from env vars"""
-    network = os.environ.get("VPS_DOCKER_NETWORK")
-    port = os.environ.get("VPS_DOCKER_PORT")
-    repo = os.environ.get("VPS_DOCKER_REPO")
-    image = f"{repo}:latest"
-    app_entrypoint = os.environ.get("VPS_APP_ENTRYPOINT")
-    app_mount = os.environ.get("VPS_APP_MOUNT")
-    app_name = os.environ.get("VPS_APP_NAME")
-    env_file = os.environ.get("VPS_APP_ENV_FILE")
+    return os.environ.get("VPS_DOCKER_RUN")
+    # network = os.environ.get("VPS_DOCKER_NETWORK")
+    # port = os.environ.get("VPS_DOCKER_PORT")
+    # repo = os.environ.get("VPS_DOCKER_REPO")
+    # image = f"{repo}:latest"
+    # app_entrypoint = os.environ.get("VPS_APP_ENTRYPOINT")
+    # app_mount = os.environ.get("VPS_APP_MOUNT")
+    # app_name = os.environ.get("VPS_APP_NAME")
+    # env_file = os.environ.get("VPS_APP_ENV_FILE")
 
-    docker_cmd = f"docker run -d --name {app_name} --network {network} --env-file {env_file} -p {port}:{port}"
+    # docker_cmd = f"docker run -d --name {app_name} --network {network} --env-file {env_file} -p {port}:{port}"
 
-    if app_mount:
-        docker_cmd = f"{docker_cmd} -v {app_mount}"
+    # if app_mount:
+    #     docker_cmd = f"{docker_cmd} -v {app_mount}"
 
-    return f"{docker_cmd} {image} {app_entrypoint}"
+    # return f"{docker_cmd} {image} {app_entrypoint}"
 
 
 def _vps_file_copy(host: str, user: str, file: str) -> int:
