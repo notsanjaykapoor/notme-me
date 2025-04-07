@@ -1,0 +1,12 @@
+kind: pod
+metadata: # required ?
+  name: notme-me
+spec:
+  containers: # only 1 allowed
+    - name: notme-me-prd
+      command: make prd
+      env: .env.me
+      image: docker.io/notsanjay/notme-me:latest
+      network: notme # docker network
+      ports:
+        - 5000

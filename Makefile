@@ -6,7 +6,7 @@ PYTHON = $(VENV)/bin/python3
 .PHONY: build clean deploy dev install
 
 build:
-	./scripts/vps/vps-utils build
+	./scripts/docker-utils build
 
 deploy:
 	./scripts/vps/vps-utils deploy --host 5.161.208.47 --user root

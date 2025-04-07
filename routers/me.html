@@ -15,61 +15,70 @@
             target="_blank">LinkedIn</a>.
     </p>
     <p class="mt-10">
-        My public code repos are a playground for learning and exploring. These repos can be categorized as general
-        purpose
-        tooling in various languages
-        (<a class="font-bold text-sky-400" href="https://github.com/notsanjaykapoor/notme-elixir"
-            target="_blank">Elixir</a>,
-        <a class="font-bold text-sky-400" href="https://github.com/notsanjaykapoor/notme-python"
-            target="_blank">Python</a>,
-        <a class="font-bold text-sky-400" href="https://github.com/notsanjaykapoor/notme-ruby" target="_blank">Ruby</a>)
-        and
-        application specific.
+        My public code repos are a playground for learning and exploring in a variety of languages. I have built each
+        one with a purpose that's useful to me in some way, from diving deeper into technology that's interesting to me
+        to building tools that I use daily.
     </p>
     <p class="mt-10">
         The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/notme-corpus"
-            target="_blank">notme-corpus</a> repo is a
-        RAG app that ingests a list of documents, generates embeddings and stores them in a <a
-            class="font-bold text-sky-400" href="https://qdrant.tech/" target="_blank">Qdrant</a> vector database. The
-        user
-        interface allows natural language
-        queries on any ingested corpus. The ingest process supports multimodal datasets, using Qdrant's ability to store
-        multiple vectors in a single point. The app also supports one-shot image captioning. Image datasets use <a
-            class="font-bold text-sky-400" href="https://openai.com/index/clip" target="_blank">CLIP</a> models, and all
-        queries are run using a local LLM to address security concerns with sensitive data. The app is a Python codebase
-        with a user interface built using <a class="font-bold text-sky-400" href="https://htmx.org/"
-            target="_blank">Htmx</a>.
+            target="_blank">notme-corpus</a> repo contains a RAG app that ingests a list of documents, generates
+        embeddings and stores them in a <a class="font-bold text-sky-400" href="https://qdrant.tech/"
+            target="_blank">Qdrant</a> vector database. The
+        user interface allows natural language queries on any ingested corpus. The ingest process supports multimodal
+        datasets, using Qdrant's ability to store multiple vectors in a single point. The app also supports one-shot
+        image captioning. Image datasets use <a class="font-bold text-sky-400" href="https://openai.com/index/clip"
+            target="_blank">CLIP</a> models, and all queries are run using a local LLM to address security concerns with
+        sensitive data. The repo is a Python codebase using <a class="font-bold text-sky-400"
+            href="https://fastapi.tiangolo.com/">FastApi</a>, <a class="font-bold text-sky-400"
+            href="https://github.com/abetlen/llama-cpp-python">Llama-cpp</a>
+        and <a class="font-bold text-sky-400" href="https://htmx.org/" target="_blank">Htmx</a>.
     </p>
     <p class="mt-10">
-        The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/notme-paas"
-            target="_blank">notme-paas</a> repo contains 2 apps, a distributed queue manager and a password manager.
+        The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/notme-cube"
+            target="_blank">notme-cube</a> repo contains a distributed queue manager housed in a Python codebase using
+        <a class="font-bold text-sky-400" href="https://fastapi.tiangolo.com/">FastApi</a> and <a
+            class="font-bold text-sky-400" href="https://htmx.org/" target="_blank">Htmx</a>.
 
-        This distributed queue solution uses lower cost vps providers (e.g. <a class="font-bold text-sky-400"
-            href="https://www.hetzner.com/" target="_blank">Hetzner</a>), <a class="font-bold text-sky-400"
-            href="https://nats.io/" target="_blank">Nats</a>
-        (a
-        wonderful networking library),
-        and a Postgres work queue to implement a solution that can distribute workloads across multiple machines and
-        auto
-        scale those machines as necessary.
+        The distributed queue manager uses <a class="font-bold text-sky-400" href="https://nats.io/"
+            target="_blank">Nats</a> (a wonderful networking library) and a Postgres work queue to implement a solution
+        that can distribute workloads across multiple machines and auto scale those machines as necessary, all using
+        lower cost vps providers such as <a class="font-bold text-sky-400" href="https://www.hetzner.com/"
+            target="_blank">Hetzner</a>.
+    </p>
+    <p class="mt-10">
+        The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/notme-secrets"
+            target="_blank">notme-secrets</a> repo contains a password manager housed in a Python codebase using <a
+            class="font-bold text-sky-400" href="https://fastapi.tiangolo.com/">FastApi</a> and <a
+            class="font-bold text-sky-400" href="https://htmx.org/" target="_blank">Htmx</a>.
 
         The password manager app uses <a class="font-bold text-sky-400" href="https://www.passwordstore.org/"
             target="_blank">pass</a> and gpg encryption under the hood. It gives users control over their password
-        management
-        using secure, open-source encryption. The app is a Python
-        codebase with a user interface built using <a class="font-bold text-sky-400" href="https://htmx.org/"
-            target="_blank">Htmx</a>.
+        management using secure, open-source encryption, and S3 compatible storage.
+    </p>
+    <p class="mt-10">
+        The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/notme-ruby"
+            target="_blank">notme-ruby</a> repo contains a train route explorer and a places interface, housed in a Ruby
+        codebase using <a class="font-bold text-sky-400" href="https://roda.jeremyevans.net/index.html">Roda</a>, <a
+            class="font-bold text-sky-400" href="https://sequel.jeremyevans.net/">Sequel</a> and <a
+            class="font-bold text-sky-400" href="https://htmx.org/" target="_blank">Htmx</a>.
+
+        The train route explorer imports eurail routes into a <a class="font-bold text-sky-400"
+            href="https://neo4j.com/">Neo4j</a> graph database and provides an interface to find the
+        shortest route between cities. The places interface provides a way to search, add, tag and map places. It uses
+        <a class="font-bold text-sky-400" href="https://www.openstreetmap.org/">OpenStreetMap</a> and <a
+            class="font-bold text-sky-400" href="https://www.mapbox.com/">Mapbox</a> for searching places and displaying
+        maps. Its been a very helpful travel tool for me.
     </p>
     <p class="mt-10">
         The <a class="font-bold text-blue-600" href="https://github.com/notsanjaykapoor/deploybot"
             target="_blank">deploybot</a> repo is an
-        ops tool used to build and deploy apps in Kubernetes environments. It's built in Rust and uses PKI to control
-        user
-        access to deployable assets.
+        ops tool used to build and deploy apps in Kubernetes environments. The app is built in Rust and uses PKI to
+        control user access to deployable assets.
     </p>
     <p class="mt-10">
         I am based in Chicago. Reach out via <a class="font-bold text-blue-600"
-            href="mailto:notsanjaykapoor@gmail.com">email</a>.
+            href="mailto:notsanjaykapoor@gmail.com">email</a> or <a class="font-bold text-blue-600"
+            href="https://www.instagram.com/swrecked" target="_blank">instagram</a>.
     </p>
     <p class="mt-20 text-xs">
         @{{ app_version }}

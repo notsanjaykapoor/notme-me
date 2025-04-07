@@ -1,4 +1,4 @@
-FROM python:3.12.4-slim as runner
+FROM python:3.12.4-slim AS runner
 
 ENV PYTHONUNBUFFERED=1 UV_HTTP_TIMEOUT=60
 
@@ -10,7 +10,7 @@ RUN apt-get -y update && \
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY pyproject.toml uv.lock ./
 
-FROM runner as base
+FROM runner AS base
 ARG APP_VERSION=version
 WORKDIR /app
 ADD . ./

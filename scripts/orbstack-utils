@@ -1,0 +1,178 @@
+#!/usr/bin/env python
+
+import subprocess
+
+import click
+
+NATS_CMD = "docker run -d --rm --net host --name nats-dev -p 4222:4222 -p 8222:8222 nats:latest"
+NEO_CMD = "docker run -d --rm --net host --name neo-dev --volume=$HOME/data/neo:/data -p 7687:7687 -p 7474:7474 --env NEO4J_AUTH=none --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes neo4j:enterprise"
+POSTGRES_CMD = "docker run -d --rm --net host --name postgres-dev --volume=$HOME/OrbStack/docker/volumes/postgres-vol:/var/lib/postgresql/data --platform linux/amd64 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=development -e PGPORT=5433 postgis/postgis:14-3.3"
+QDRANT_DEV = "docker run -d --rm --net host --name qdrant-dev --volume=$HOME/data/qdrant:/qdrant/storage -p 6333:6333 qdrant/qdrant"
+REDIS_CMD = "docker run -d --rm --net host --name redis-dev -p 6379:6379 redis:latest"
+TYPESENSE_CMD = "docker run -d --rm --net host --name typesense-dev --volume=$HOME/data/typesense:/data -p 8108:8108 typesense:latest --entrypoint=/opt/typesense-server -c '--api-key=xyz --enable-cors'"
+
+@click.group()
+def cli():
+    pass
+
+
+@click.command()
+@click.option("--name", default="nats-dev", required=False, help="container name")
+def nats_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(NATS_CMD, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+@click.command()
+@click.option("--name", default="neo-dev", required=False, help="container name")
+def neo_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(NEO_CMD, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+@click.command()
+@click.option("--name", default="postgres-dev", required=False, help="container name")
+def postgres_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(POSTGRES_CMD, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+@click.command()
+@click.option("--name", default="qdrant-dev", required=False, help="container name")
+def qdrant_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(QDRANT_DEV, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+@click.command()
+@click.option("--name", default="redis-dev", required=False, help="container name")
+def redis_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(REDIS_CMD, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+@click.command()
+@click.option("--name", default="typesense-dev", required=False, help="container name")
+def typesense_start(name: str):
+    print(f"container check '{name}'", end=" ... ", flush=True)
+
+    c_running = _containers_list()
+
+    if name in c_running:
+        _print_status("exists")
+        exit(0)
+
+    result = subprocess.run(TYPESENSE_CMD, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        _print_error(f"error - {result.stderr.decode()}")
+        exit(result.returncode)
+
+    _print_ok("started")
+
+
+def _containers_list() -> list[str]:
+    """
+    Get list of currently running containers
+    """
+    names = []
+
+    result = subprocess.run("docker container ls", shell=True, capture_output=True)
+    lines = result.stdout.decode("utf-8").split("\n")
+    lines.pop(0)
+
+    for line in lines:
+        if not line:
+            continue
+        name = line.split(" ")[-1]
+        names.append(name)
+
+    return sorted(names)
+
+
+def _print_error(s: str):
+    print("\x1b[1;31m" + s + "\x1b[0m", flush=True)
+
+
+def _print_ok(s: str):
+    print("\x1b[1;32m" + s + "\x1b[0m", flush=True)
+
+
+def _print_status(s: str):
+    print("\x1b[1;36m" + s + "\x1b[0m", flush=True)
+
+
+cli.add_command(nats_start)
+cli.add_command(neo_start)
+cli.add_command(postgres_start)
+cli.add_command(qdrant_start)
+cli.add_command(redis_start)
+cli.add_command(typesense_start)
+
+if __name__ == "__main__":
+    cli()
